@@ -12,10 +12,7 @@ pipeline {
             steps {
                 echo 'Build docker image'
                 sh 'pwd -P'
-                sh 'ls -l'
-                script {
-                    dockerImage = docker.build + registry + ":$BUILD_NUMBER"
-                }
+                sh "podman build -t mbulaheni/todo-api:1.0 ."
             }
         }
         stage("Deploy-Docker-Image") {
