@@ -7,14 +7,23 @@ pipeline {
     }
 
     stages {
+        stage("Pull Images") {
+            steps {
+                echo 'Pulling mongo docker image'
+                sh "podman pull docker.io/library/mongo:latest"
+                echo 'Pulling mongo-express docker image'
+                sh "podman pull docker.io/library/mongo-express:latest"
+            }
+        }
 
         stage("Build-Docker-Image") {
             steps {
                 echo 'Build docker image'
                 sh 'pwd -P'
-                sh "podman build -t mbulaheni/todo-api:1.0 ."
+                sh "podman build -t docker.io/mbulaheni/todo-api:latest ."
             }
         }
+
         stage("Deploy-Docker-Image") {
             steps {
                 echo 'Deploy docker image'
