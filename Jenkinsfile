@@ -10,9 +10,9 @@ pipeline {
         stage("Pull Images") {
             steps {
                 echo 'Pulling mongo docker image'
-                sh "docker pull docker.io/library/mongo:latest"
+                sh "/usr/local/bin/docker pull docker.io/library/mongo:latest"
                 echo 'Pulling mongo-express docker image'
-                sh "docker pull docker.io/library/mongo-express:latest"
+                sh "/usr/local/bin/docker pull docker.io/library/mongo-express:latest"
             }
         }
 
@@ -20,14 +20,14 @@ pipeline {
             steps {
                 echo 'Build docker image'
                 sh 'pwd -P'
-                sh "docker build -t docker.io/mbulaheni/todo-api:latest ."
+                sh "/usr/local/bin/docker build -t docker.io/mbulaheni/todo-api:latest ."
             }
         }
 
         stage("Push-Docker-Image") {
             steps {
                 echo 'Push docker image to repo'
-                sh 'docker images'
+                sh '/usr/local/bin/docker images'
             }
         }
     }
