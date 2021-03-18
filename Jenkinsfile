@@ -27,8 +27,14 @@ pipeline {
         stage("Push-Docker-Image") {
             steps {
                 echo 'Push docker image to repo'
-                sh '/usr/local/bin/docker images'
+                sh '/usr/local/bin/docker images mbulaheni/todo-api:latest'
             }
         }
+
+        stage("Invoke-Web-Client-Pipeline") {
+            steps {
+                build 'todo-webclient-pipeline'
+            }
+        }        
     }
 }
