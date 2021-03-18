@@ -35,6 +35,12 @@ pipeline {
             steps {
                 build 'todo-webclient-pipeline'
             }
-        }        
+        } 
+
+        stage("Deploy") {
+            steps {
+                sh '/Library/Frameworks/Python.framework/Versions/3.7/bin/docker-compose -f fullstack.yaml up -d'
+            }
+        }                
     }
 }
